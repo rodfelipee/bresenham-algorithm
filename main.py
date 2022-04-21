@@ -3,13 +3,16 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 
-def dda(x1, x2, y1, y2):
+def dda(x1, y1, x2, y2):
     # Algoritmo DDA
 
-    dx = x2 - x1
-    dy = y2 - y1
+    x = x1
+    y = y1
 
-    if abs(dx) > abs(dy):
+    dx = abs(x2 - x1)
+    dy = abs(y2 - y1)
+
+    if dx > dy:
         p = abs(dx)
     else:
         p = abs(dy)
@@ -24,10 +27,10 @@ def dda(x1, x2, y1, y2):
 
     while a < p:
         a += 1
-        x1 = x1 + incremento_x
-        y1 = y1 + incremento_y
+        x1 += incremento_x
+        y1 += incremento_y
 
-        print(f"x: {int(x1)} y: {int(y1)}")
+        print(f"x, y: ({int(x1)}, {int(y1)})")
 
         cord_x.append(x1)
         cord_y.append(y1)
@@ -37,7 +40,7 @@ def dda(x1, x2, y1, y2):
     plt.get_current_fig_manager().canvas.manager.set_window_title('Algoritmo DDA')
     plt.xlabel("Eixo-x")
     plt.ylabel("Eixo-y")
-    plt.title("Algoritmo DDA")
+    plt.title("Algoritmo DDA (6,9) - (11, 12)")
     plt.show()
 
 
@@ -55,17 +58,17 @@ def bresenham(x1, y1, x2, y2):
     if incremento > 1:
         dx, dy = dy, dx
         х, у = у, х
-        x1, yl = y1, x1
+        x1, y1 = y1, x1
         x2, y2 = y2, x2
 
-    p = 2 * dy-dx
-
-    print(f'x: {x} y: {y}')
+    p = 2 * dy - dx
 
     cord_x = [x]
     cord_y = [y]
 
-    for a in range(dx):
+    print(f'x, y: ({x}, {y})')
+
+    for c in range(dx):
         if p > 0:
             if y < y2:
                 y += 1
@@ -79,7 +82,7 @@ def bresenham(x1, y1, x2, y2):
         else:
             x -= 1
 
-        print(f'x. ({x}) y.({y})')
+        print(f'x, y: ({x}, {y})')
 
         cord_x.append(x)
         cord_y.append(y)
@@ -87,10 +90,9 @@ def bresenham(x1, y1, x2, y2):
     # Inicializacao do grafico
     plt.plot(cord_x, cord_y, marker='o')
     plt.get_current_fig_manager().canvas.manager.set_window_title('Algoritmo Bresenham')
-    plt.get_current_fig_manager().manager
     plt.xlabel("Eixo-x")
     plt.ylabel("Eixo-y")
-    plt.title("Algoritmo Bresenham")
+    plt.title("Algoritmo Bresenham (2, 2) - (7, 6)")
     plt.show()
 
 
@@ -102,7 +104,7 @@ def main():
     op = int(input("Selecione o algoritmo: "))
 
     if op == 1:
-        dda(6, 9, 11, 12)
+        dda(5, 9, 11, 12)
     else:
         bresenham(2, 2, 7, 6)
 
